@@ -2,6 +2,7 @@
 
 **Author:** Zoë Finelli  
 **Course:** A.B. Cognitive Science - CSCI1300  
+**Date:** 29 October 2024
 
 ---
 
