@@ -1,6 +1,8 @@
-====================================================== Python OOP Game: Dragon, Wizard, Knight
+==========================================
+Python OOP Game: Dragon, Wizard, Knight
+==========================================
 
-A.B Cognitive Science - CSCI1300
+A.B. Cognitive Science - CSCI1300
 Author: Zoë Finelli
 
 PROJECT OVERVIEW
