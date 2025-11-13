@@ -1,102 +1,59 @@
-==========================================
-Python OOP Game: Dragon, Wizard, Knight
-==========================================
+# Python OOP Implementation: Dragon, Wizard, Knight
 
-A.B. Cognitive Science - CSCI1300
-Author: Zoë Finelli
+**Author:** Zoë Finelli  
+**Course:** A.B. Cognitive Science - CSCI1300  
 
-PROJECT OVERVIEW
+---
 
-This project is an Object-Oriented Programming (OOP) implementation of a
-"Rock, Paper, Scissors"-style console game called "Dragon, Wizard, Knight."
+## 1. Project Overview
 
-The primary goal of this project was to refactor a procedural script (which
-relied heavily on global variables) into a robust, class-based application.
-This demonstrates key OOP principles and creates a more stable and extensible
-program.
+This project features a robust Object-Oriented Programming (OOP) implementation of a console-based strategy game, "Dragon, Wizard, Knight" (a variant of Rock, Paper, Scissors).
 
-The game includes two main phases:
+The primary objective of this development was to refactor a legacy procedural script—which relied heavily on global variables and linear flow—into a modular, class-based application. This architecture demonstrates core Computer Science principles, including inheritance, polymorphism, and encapsulation, resulting in a highly maintainable and extensible codebase.
 
-Standard Game: The user plays against a single AI opponent ("Sally").
+### Game Phases
+* **Standard Game:** The user competes against an AI opponent ("Sally") for a user-defined number of rounds using the standard interaction triangle (Dragon > Knight > Wizard > Dragon).
+* **Bonus Round:** Victory in the standard game unlocks a "Boss Rush" mode. The player must defeat two AI opponents ("Sally" and "Bob") simultaneously. This phase introduces a new variable, the **Druid**, which carries unique high-risk/high-reward scoring rules.
 
-Bonus Round: If the user wins the standard game, a bonus round
-is unlocked. This round introduces a second AI opponent ("Bob") and a new
-playable character ("Druid") with unique win/loss rules.
+---
 
-HOW TO RUN
+## 2. Technical Architecture
 
-Language: Python 3.10+
+The project structure moves away from functional programming towards a strict OOP hierarchy.
 
-Dependencies: None. This project uses only the Python Standard Library
-(specifically the random module).
+### Class Structure
 
-Installation:
-No installation is required. Just clone or download the repository.
+* **`Player` (Base Class)**
+    * Serves as the parent interface for all participants.
+    * Encapsulates shared attributes (`name`, `points`) to adhere to the **DRY (Don't Repeat Yourself)** principle.
+    * Defines an abstract method `choose_move()` to enforce structure in child classes.
 
-Run Main Script:
-From your terminal, simply execute the Python file:
+* **`HumanPlayer` (Child Class)**
+    * Inherits from `Player`.
+    * **Polymorphism:** Overrides `choose_move()` to handle standard input (stdin) and implements robust input validation (filtering for valid characters D/W/K).
 
-python dragon_knight_wizard_game.py
+* **`RobotPlayer` (Child Class)**
+    * Inherits from `Player`.
+    * **Polymorphism:** Overrides `choose_move()` to implement AI logic (randomized decision-making using the `random` library).
 
+* **`DragonWizardKnightGame` (Controller Class)**
+    * Acts as the central engine, managing the entire lifecycle of the application.
+    * **State Management:** Replaces global variables with instance attributes (`self.player`, `self.rounds_total`), preventing namespace pollution.
+    * **Data-Driven Logic:** Utilizes Hash Maps (Dictionaries) for win/loss condition lookups (`{'d': 'k', ...}`), reducing algorithmic complexity compared to nested `if/else` statements.
 
-EXPECTED OUTPUT
+---
 
-Running dragon_knight_wizard_game.py will:
+## 3. Installation & Execution
 
-Print the welcome message and game rules.
+This project depends only on the Python Standard Library. No external `pip` installations are required.
 
-Prompt the user for their name and the desired number of rounds.
+### Prerequisites
+* Python 3.10 or higher
 
-Begin the game loop, prompting the user for their move (D, K, W)
-in each round.
+### How to Run
+1.  Clone the repository or download the source file.
+2.  Navigate to the directory in your terminal.
+3.  Execute the script:
 
-Print the winner of each round and the cumulative score.
-
-Declare an "ULTIMATE winner" at the end of the standard game.
-
-If the user is the winner, the script will then initiate the bonus
-round, which has its own rules, rounds, and final winner.
-
-PROJECT STRUCTURE
-
-This is a single-file project, keeping the structure simple.
-
-dragon_knight_wizard_game/
-│
-├── README.md                       # This file
-└── dragon_knight_wizard_game.py    # The complete Python script
-
-PROJECT DESIGN & KEY CONCEPTS
-
-The core of this project was the transition from procedural to
-Object-Oriented Programming. The design is built on three main classes:
-
-Player (Base Class):
-A parent class that defines the "interface" for all players. It
-initializes common attributes (name, points) and a placeholder
-choose_move() method.
-
-HumanPlayer (Child Class):
-Inherits from Player. Its choose_move() method is implemented to
-prompt the user for a validated text input.
-
-RobotPlayer (Child Class):
-Also inherits from Player. Its choose_move() method is
-implemented to select a move at random from the list of
-available characters.
-
-DragonWizardKnightGame (Main Class):
-This class acts as the "controller" for the entire application.
-
-State Management: All former global variables (like
-userPoints, currentRound, etc.) are now instance attributes
-(e.g., self.player, self.current_round). This is a much
-safer and cleaner way to manage the program's state.
-
-Encapsulation: All game logic (play_standard_round,
-get_final_winner, run_bonus_game) is encapsulated as
-methods within this class.
-
-Clean Logic: The win/loss rules are stored in a dictionary
-(self.normal_rules) for fast lookups, which avoids a large and
-cluttered if/elif/else chain.
+```bash
+python dragon_wizard_knight.py
